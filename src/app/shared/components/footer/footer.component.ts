@@ -35,16 +35,25 @@ import { MatIconModule } from '@angular/material/icon';
   styles: [`
     .footer { background: #1c1c1c; color: #ccc; margin-top: 60px; }
     .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; padding: 48px 20px 32px; }
-    .footer-brand .brand-icon { font-size: 28px; }
-    .footer-brand .brand-text { font-size: 22px; font-weight: 700; color: #e23744; margin-left: 8px; }
-    .footer-brand p { margin-top: 8px; font-size: 13px; color: #888; }
+    .footer-brand .brand-icon { font-size: 26px; }
+    .footer-brand .brand-text { font-size: 20px; font-weight: 700; color: #e23744; margin-left: 8px; }
+    .footer-brand p { margin-top: 8px; font-size: 13px; color: #888; line-height: 1.5; }
     .footer-links, .footer-contact { display: flex; flex-direction: column; gap: 10px; }
-    .footer-links h4, .footer-contact h4 { color: #fff; font-size: 15px; margin-bottom: 4px; }
+    .footer-links h4, .footer-contact h4 { color: #fff; font-size: 14px; margin-bottom: 4px; }
     .footer-links a { color: #aaa; font-size: 13px; text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: #e23744; }
     .footer-contact p { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #aaa; }
     .footer-contact mat-icon { font-size: 16px; height: 16px; width: 16px; }
-    .footer-bottom { border-top: 1px solid #333; text-align: center; padding: 16px; font-size: 12px; color: #666; }
+    .footer-bottom { border-top: 1px solid #333; text-align: center; padding: 16px 20px; font-size: 12px; color: #666; line-height: 1.6; }
+
+    @media(max-width: 768px) {
+      .footer-inner { grid-template-columns: 1fr; gap: 28px; padding: 36px 20px 24px; }
+      .footer-brand .brand-text { font-size: 18px; }
+    }
+    @media(max-width: 480px) {
+      .footer-inner { padding: 28px 16px 20px; }
+      .footer-bottom { font-size: 11px; }
+    }
   `]
 })
 export class FooterComponent {}

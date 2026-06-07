@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -76,34 +76,46 @@ import { Restaurant } from '../../core/models/restaurant.model';
     </div>
   `,
   styles: [`
-    .page { padding: 32px 20px; }
-    .page-title { font-size: 28px; font-weight: 700; margin-bottom: 24px; }
-    .filters-bar { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; margin-bottom: 16px; }
-    .search-field { width: 320px; }
-    .filter-chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding-top: 8px; }
-    .filter-chip { padding: 8px 16px; border-radius: 20px; border: 1.5px solid #ddd; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; background: white; color: #3d4152; display: flex; align-items: center; gap: 6px; }
+    .page { padding: 28px 20px 60px; }
+    .page-title { font-size: 26px; font-weight: 700; margin-bottom: 20px; }
+    .filters-bar { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+    .search-field { width: 100%; max-width: 400px; }
+    .filter-chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .filter-chip { padding: 7px 14px; border-radius: 20px; border: 1.5px solid #ddd; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; background: white; color: #3d4152; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
     .filter-chip:hover { border-color: #e23744; color: #e23744; }
     .chip-active { background: #e23744 !important; color: white !important; border-color: #e23744 !important; }
     .veg-dot { width: 10px; height: 10px; background: #3d9b35; border-radius: 50%; display: inline-block; }
-    .results-info { font-size: 14px; color: #686b78; margin-bottom: 20px; }
-    .restaurant-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+    .results-info { font-size: 13px; color: #686b78; margin-bottom: 16px; }
+    .restaurant-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
     .restaurant-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.2s; text-decoration: none; color: inherit; display: block; }
     .restaurant-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.12); }
-    .card-image { position: relative; height: 180px; overflow: hidden; }
+    .card-image { position: relative; height: 175px; overflow: hidden; }
     .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
     .restaurant-card:hover img { transform: scale(1.04); }
     .offer-badge { position: absolute; bottom: 10px; left: 10px; background: #e23744; color: white; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
     .veg-badge { position: absolute; top: 10px; right: 10px; background: white; color: #3d9b35; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
     .card-body { padding: 14px; }
     .card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
-    .card-top h3 { font-size: 16px; font-weight: 700; }
-    .rating-badge { display: flex; align-items: center; gap: 2px; background: #3d9b35; color: white; font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 6px; }
+    .card-top h3 { font-size: 15px; font-weight: 700; }
+    .rating-badge { display: flex; align-items: center; gap: 2px; background: #3d9b35; color: white; font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 6px; flex-shrink: 0; }
     .rating-badge mat-icon { font-size: 13px; height: 13px; width: 13px; }
     .cuisine { font-size: 12px; color: #686b78; margin-bottom: 10px; }
-    .card-meta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .card-meta { display: flex; gap: 10px; flex-wrap: wrap; }
     .card-meta span { display: flex; align-items: center; gap: 3px; font-size: 12px; color: #686b78; }
     .card-meta mat-icon { font-size: 14px; height: 14px; width: 14px; }
     .no-results { grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #686b78; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+    @media(max-width: 768px) {
+      .page { padding: 20px 16px 80px; }
+      .page-title { font-size: 22px; margin-bottom: 16px; }
+      .search-field { max-width: 100%; }
+      .filter-chips { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+      .restaurant-grid { grid-template-columns: 1fr; gap: 14px; }
+      .card-image { height: 160px; }
+    }
+    @media(min-width: 600px) and (max-width: 768px) {
+      .restaurant-grid { grid-template-columns: repeat(2, 1fr); }
+    }
   `]
 })
 export class RestaurantsComponent implements OnInit {

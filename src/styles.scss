@@ -47,6 +47,14 @@ a { text-decoration: none; color: inherit; }
   padding: 0 20px;
 }
 
+@media(max-width: 768px) {
+  .container { padding: 0 16px; }
+}
+
+@media(max-width: 480px) {
+  .container { padding: 0 12px; }
+}
+
 .mat-mdc-raised-button.primary-btn {
   background: var(--primary) !important;
   color: white !important;

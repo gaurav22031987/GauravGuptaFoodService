@@ -396,7 +396,18 @@ type PaymentMethod = 'card' | 'upi' | 'netbanking';
     .badges-row { display: flex; gap: 8px; flex-wrap: wrap; }
     .badge-dot { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: default; }
 
-    @media(max-width: 768px) { .checkout-layout { grid-template-columns: 1fr; } }
+    @media(max-width: 768px) {
+      .page { padding: 20px 16px 80px; }
+      .page-title { font-size: 22px; margin-bottom: 18px; }
+      .checkout-layout { grid-template-columns: 1fr; }
+      .summary-card { position: static !important; }
+      .pay-btn-wrap { flex-wrap: wrap; }
+      .pay-btn { width: 100%; justify-content: center; }
+      .qr-section { flex-direction: column; align-items: flex-start; }
+      .payment-methods { gap: 8px; }
+      .payment-method { padding: 8px 12px; font-size: 12px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
   `]
 })
 export class CheckoutComponent implements OnInit, AfterViewChecked {
