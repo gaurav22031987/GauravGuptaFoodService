@@ -45,6 +45,11 @@ export class AuthService {
     return true;
   }
 
+  loginWithSocial(user: User) {
+    localStorage.setItem('zomato_user', JSON.stringify(user));
+    this.currentUserSignal.set(user);
+  }
+
   logout() {
     localStorage.removeItem('zomato_user');
     this.currentUserSignal.set(null);
