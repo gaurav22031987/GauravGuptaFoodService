@@ -7,7 +7,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { RestaurantService } from '../../../core/services/restaurant.service';
 import { CartService } from '../../../core/services/cart.service';
-import { map } from 'rxjs/operators';
 
 interface ChatMessage {
   from: 'user' | 'bot';
@@ -472,7 +471,7 @@ export class ChatboxComponent implements OnInit, AfterViewChecked {
       menuItem = cat.items.find(i => i.id === item.id) || menuItem;
     }
     if (!menuItem || !restaurant) return;
-    this.cartService.addItem(menuItem, restaurant);
+    this.cartService.addItem(menuItem);
     this.snackBar.open(`✅ ${item.name} added to cart!`, '', { duration: 2000, panelClass: 'snack-success' });
     this.pushBot(`✅ <strong>${item.name}</strong> (₹${item.price}) added to your cart!`, ['🛒 My Cart', 'Checkout', '➕ Add More']);
   }
