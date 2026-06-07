@@ -1,4 +1,4 @@
-# 🍔 FoodRush — Zomato-like Food Delivery App
+# 🍔 FoodRush — Kitchen King Food Delivery App
 
 A full-featured food delivery application built with **Angular 18**, **Angular Material**, and **Stripe** payment integration.
 
