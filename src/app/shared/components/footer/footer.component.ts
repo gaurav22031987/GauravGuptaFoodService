@@ -23,8 +23,8 @@ import { MatIconModule } from '@angular/material/icon';
         </div>
         <div class="footer-contact">
           <h4>Contact</h4>
-          <p><mat-icon>email</mat-icon> support&#64;foodrush.com</p>
-          <p><mat-icon>phone</mat-icon> 1800-123-4567</p>
+          <p><mat-icon>email</mat-icon> Gaurav22031987&#64;gmail.com</p>
+          <p><mat-icon>phone</mat-icon> 9636556474</p>
         </div>
       </div>
       <div class="footer-bottom">
