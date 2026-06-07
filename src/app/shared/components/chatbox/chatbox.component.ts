@@ -135,9 +135,10 @@ interface RestaurantCard {
   `,
   styles: [`
     /* FAB */
-    .chat-fab { position: fixed; bottom: 28px; right: 28px; z-index: 1000; width: 56px; height: 56px; border-radius: 50%; background: #e23744; color: white; border: none; cursor: pointer; box-shadow: 0 4px 16px rgba(226,55,68,0.4); display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
-    .chat-fab:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(226,55,68,0.5); }
-    .chat-fab.open { background: #c0392b; }
+    .chat-fab { position: fixed; bottom: 28px; right: 28px; z-index: 9999; width: 60px; height: 60px; border-radius: 50%; background: #e23744; color: white; border: none; cursor: pointer; box-shadow: 0 4px 20px rgba(226,55,68,0.55); display: flex; align-items: center; justify-content: center; transition: all 0.3s; animation: fabPulse 2.5s ease-in-out infinite; }
+    .chat-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(226,55,68,0.65); animation: none; }
+    .chat-fab.open { background: #c0392b; animation: none; }
+    @keyframes fabPulse { 0%,100% { box-shadow: 0 4px 20px rgba(226,55,68,0.55); } 50% { box-shadow: 0 4px 32px rgba(226,55,68,0.9), 0 0 0 10px rgba(226,55,68,0.15); } }
     .fab-badge { position: absolute; top: -4px; right: -4px; background: #ff9800; color: white; font-size: 11px; font-weight: 700; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 
     /* Panel */
