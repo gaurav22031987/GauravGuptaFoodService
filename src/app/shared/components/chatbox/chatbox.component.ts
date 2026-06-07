@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { RestaurantService } from '../../../core/services/restaurant.service';
 import { CartService } from '../../../core/services/cart.service';
+import { ChatService } from '../../../core/services/chat.service';
 
 interface ChatMessage {
   from: 'user' | 'bot';
@@ -33,15 +34,22 @@ interface RestaurantCard {
   imports: [CommonModule, FormsModule, MatIconModule, MatButtonModule, MatSnackBarModule],
   template: `
     <!-- Floating Button -->
-    <button class="chat-fab" (click)="toggleChat()" [class.open]="isOpen">
-      <mat-icon>{{ isOpen ? 'close' : 'chat' }}</mat-icon>
-      @if (!isOpen && unread > 0) {
+    <button class="chat-fab" (click)="toggleChat()" [class.open]="chatService.isOpen()">
+      @if (chatService.isOpen()) {
+        <mat-icon>close</mat-icon>
+      } @else {
+        <span class="fab-inner">
+          <mat-icon>chat</mat-icon>
+          <span class="fab-label">Chat</span>
+        </span>
+      }
+      @if (!chatService.isOpen() && unread > 0) {
         <span class="fab-badge">{{ unread }}</span>
       }
     </button>
 
     <!-- Chat Panel -->
-    @if (isOpen) {
+    @if (chatService.isOpen()) {
       <div class="chat-panel">
         <!-- Header -->
         <div class="chat-header">
@@ -135,11 +143,13 @@ interface RestaurantCard {
   `,
   styles: [`
     /* FAB */
-    .chat-fab { position: fixed; bottom: 28px; right: 28px; z-index: 9999; width: 60px; height: 60px; border-radius: 50%; background: #e23744; color: white; border: none; cursor: pointer; box-shadow: 0 4px 20px rgba(226,55,68,0.55); display: flex; align-items: center; justify-content: center; transition: all 0.3s; animation: fabPulse 2.5s ease-in-out infinite; }
-    .chat-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(226,55,68,0.65); animation: none; }
-    .chat-fab.open { background: #c0392b; animation: none; }
-    @keyframes fabPulse { 0%,100% { box-shadow: 0 4px 20px rgba(226,55,68,0.55); } 50% { box-shadow: 0 4px 32px rgba(226,55,68,0.9), 0 0 0 10px rgba(226,55,68,0.15); } }
-    .fab-badge { position: absolute; top: -4px; right: -4px; background: #ff9800; color: white; font-size: 11px; font-weight: 700; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .chat-fab { position: fixed; bottom: 24px; right: 24px; z-index: 99999; min-width: 120px; height: 52px; border-radius: 28px; background: #e23744; color: white; border: none; cursor: pointer; box-shadow: 0 6px 24px rgba(226,55,68,0.6); display: flex; align-items: center; justify-content: center; transition: all 0.3s; animation: fabPulse 2s ease-in-out infinite; padding: 0 20px 0 14px; }
+    .chat-fab:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(226,55,68,0.7); animation: none; }
+    .chat-fab.open { min-width: 52px; padding: 0; border-radius: 50%; animation: none; background: #c0392b; }
+    .fab-inner { display: flex; align-items: center; gap: 8px; }
+    .fab-label { font-size: 14px; font-weight: 700; letter-spacing: 0.3px; white-space: nowrap; }
+    @keyframes fabPulse { 0%,100% { box-shadow: 0 6px 24px rgba(226,55,68,0.6); transform: translateY(0); } 50% { box-shadow: 0 8px 36px rgba(226,55,68,0.85), 0 0 0 8px rgba(226,55,68,0.18); transform: translateY(-3px); } }
+    .fab-badge { position: absolute; top: -6px; right: -6px; background: #ff9800; color: white; font-size: 11px; font-weight: 700; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white; }
 
     /* Panel */
     .chat-panel { position: fixed; bottom: 96px; right: 28px; z-index: 999; width: 370px; height: 560px; background: white; border-radius: 20px; box-shadow: 0 8px 40px rgba(0,0,0,0.18); display: flex; flex-direction: column; overflow: hidden; animation: slideUp 0.25s ease; }
@@ -203,18 +213,18 @@ interface RestaurantCard {
     .send-btn:hover:not(:disabled) { background: #c0392b; }
     .send-btn:disabled { background: #ccc; cursor: default; }
 
-    @media(max-width: 480px) { .chat-panel { width: calc(100vw - 24px); right: 12px; bottom: 80px; height: 70vh; } .chat-fab { bottom: 16px; right: 16px; } }
+    @media(max-width: 480px) { .chat-panel { width: calc(100vw - 24px); right: 12px; bottom: 76px; height: 70vh; } .chat-fab { bottom: 16px; right: 16px; min-width: 100px; height: 46px; } }
   `]
 })
 export class ChatboxComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollContainer') private scrollContainer!: ElementRef<HTMLDivElement>;
 
   private restaurantService = inject(RestaurantService);
-  private cartService = inject(CartService);
+  cartService = inject(CartService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
+  chatService = inject(ChatService);
 
-  isOpen = false;
   unread = 1;
   userInput = '';
   messages: ChatMessage[] = [];
@@ -238,8 +248,8 @@ export class ChatboxComponent implements OnInit, AfterViewChecked {
   }
 
   toggleChat() {
-    this.isOpen = !this.isOpen;
-    if (this.isOpen) { this.unread = 0; this.shouldScroll = true; }
+    this.chatService.toggle();
+    if (this.chatService.isOpen()) { this.unread = 0; this.shouldScroll = true; }
   }
 
   clearChat() {
@@ -499,13 +509,13 @@ export class ChatboxComponent implements OnInit, AfterViewChecked {
   private pushUser(text: string) {
     this.messages.push({ from: 'user', text, time: new Date() });
     this.shouldScroll = true;
-    if (!this.isOpen) this.unread++;
+    if (!this.chatService.isOpen()) this.unread++;
   }
 
   private pushBot(text: string, chips?: string[], items?: ItemCard[], restaurants?: RestaurantCard[]) {
     this.messages.push({ from: 'bot', text, chips, items, restaurants, time: new Date() });
     this.shouldScroll = true;
-    if (!this.isOpen) this.unread++;
+    if (!this.chatService.isOpen()) this.unread++;
   }
 
   private showTyping(): Promise<void> {
