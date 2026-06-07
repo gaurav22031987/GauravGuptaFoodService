@@ -10,8 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
     <footer class="footer">
       <div class="container footer-inner">
         <div class="footer-brand">
-          <span class="brand-icon">🍔</span>
-          <span class="brand-text">FoodRush</span>
+          <span class="brand-icon">👑</span>
+          <span class="brand-text">Kitchen King Food</span>
           <p>Delivering happiness to your doorstep</p>
         </div>
         <div class="footer-links">
@@ -28,7 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2024 FoodRush. All rights reserved. Built with Angular 18 + Stripe.</p>
+        <p>© 2024 Kitchen King Food. All rights reserved.</p>
       </div>
     </footer>
   `,

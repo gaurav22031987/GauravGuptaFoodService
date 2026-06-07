@@ -29,9 +29,6 @@ import { ChatService } from '../../../core/services/chat.service';
           <a routerLink="/restaurants" routerLinkActive="active-link" mat-button>
             <mat-icon>restaurant</mat-icon> Restaurants
           </a>
-          <button mat-button class="chat-nav-btn" (click)="chatService.open()">
-            <mat-icon>chat</mat-icon> Chat
-          </button>
           @if (auth.isLoggedIn()) {
             <a routerLink="/cart" mat-icon-button [matBadge]="(cartCount$ | async) || 0" matBadgeColor="warn"
                [matBadgeHidden]="((cartCount$ | async) || 0) === 0">
@@ -75,9 +72,6 @@ import { ChatService } from '../../../core/services/chat.service';
         <a routerLink="/restaurants" class="mob-link" (click)="close()">
           <mat-icon>restaurant</mat-icon> Restaurants
         </a>
-        <a class="mob-link" (click)="chatService.open(); close()">
-          <mat-icon>chat</mat-icon> Chat with Bot
-        </a>
         @if (auth.isLoggedIn()) {
           <a routerLink="/cart" class="mob-link" (click)="close()">
             <mat-icon>shopping_cart</mat-icon> My Cart
@@ -105,8 +99,7 @@ import { ChatService } from '../../../core/services/chat.service';
     .brand-text { font-size: 18px; font-weight: 700; color: #e23744; letter-spacing: -0.3px; white-space: nowrap; }
     .nav-links { display: flex; align-items: center; gap: 6px; }
     .active-link { color: #e23744 !important; }
-    .chat-nav-btn { color: #e23744 !important; font-weight: 600; border: 1.5px solid #e23744; border-radius: 20px; padding: 0 12px; }
-    .login-btn { border-color: #e23744 !important; color: #e23744 !important; border-radius: 8px; }
+.login-btn { border-color: #e23744 !important; color: #e23744 !important; border-radius: 8px; }
     .signup-btn { background: #e23744 !important; color: white !important; border-radius: 8px; }
     .user-name-menu { padding: 12px 16px; font-weight: 600; color: #3d4152; font-size: 14px; }
 
