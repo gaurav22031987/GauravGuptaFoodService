@@ -13,7 +13,7 @@ import { environment } from '../../../environments/environment';
 import { AuthService } from './auth.service';
 import { User } from '../models/user.model';
 
-const app = getApps().length ? getApps()[0] : initializeApp(environment.firebase);
+const app = getApps().length ? getApps()[0] : initializeApp(environment.firebaseConfig);
 const firebaseAuth = getAuth(app);
 
 @Injectable({ providedIn: 'root' })
