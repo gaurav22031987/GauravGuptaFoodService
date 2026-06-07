@@ -19,8 +19,8 @@ import { CartService } from '../../../core/services/cart.service';
     <mat-toolbar class="navbar">
       <div class="nav-inner container">
         <a routerLink="/home" class="brand">
-          <span class="brand-icon">🍔</span>
-          <span class="brand-text">Gaurav Gupta Food Services</span>
+          <span class="brand-icon">👑</span>
+          <span class="brand-text">Kitchen King Food</span>
         </a>
         <div class="nav-links">
           <a routerLink="/restaurants" routerLinkActive="active-link" mat-button>
@@ -55,7 +55,7 @@ import { CartService } from '../../../core/services/cart.service';
     .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 64px; }
     .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; }
     .brand-icon { font-size: 28px; }
-    .brand-text { font-size: 17px; font-weight: 700; color: #e23744; letter-spacing: -0.3px; white-space: nowrap; }
+    .brand-text { font-size: 20px; font-weight: 700; color: #e23744; letter-spacing: -0.3px; white-space: nowrap; }
     .nav-links { display: flex; align-items: center; gap: 8px; }
     .active-link { color: #e23744 !important; }
     .login-btn { border-color: #e23744 !important; color: #e23744 !important; border-radius: 8px; }

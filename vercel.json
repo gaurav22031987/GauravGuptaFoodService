@@ -1,4 +1,5 @@
-﻿{
+{
+  "name": "kitchen-king-food",
   "buildCommand": "npm run build",
   "outputDirectory": "dist/zomato-clone/browser",
   "framework": "angular",
