@@ -1,0 +1,80 @@
+@use '@angular/material' as mat;
+
+$theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$red-palette,
+  ),
+  typography: (
+    brand-family: 'Poppins, sans-serif',
+    plain-family: 'Poppins, sans-serif',
+  ),
+  density: (scale: 0),
+));
+
+html {
+  @include mat.all-component-themes($theme);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f8f8f8;
+  color: #3d4152;
+}
+
+:root {
+  --primary: #e23744;
+  --primary-dark: #c0392b;
+  --accent: #ff6b00;
+  --text-dark: #3d4152;
+  --text-gray: #686b78;
+  --bg-light: #f8f8f8;
+  --white: #ffffff;
+  --border: #e9e9eb;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-hover: 0 4px 24px rgba(0,0,0,0.14);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+a { text-decoration: none; color: inherit; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.mat-mdc-raised-button.primary-btn {
+  background: var(--primary) !important;
+  color: white !important;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+}
+
+.chip-active {
+  background: var(--primary) !important;
+  color: white !important;
+}
+
+.snack-success .mdc-snackbar__surface {
+  background: #2e7d32 !important;
+}
+
+.snack-error .mdc-snackbar__surface {
+  background: var(--primary) !important;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
